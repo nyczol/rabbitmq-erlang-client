@@ -171,6 +171,8 @@ inet_address_preference() ->
         {ok, false} -> [inet, inet6]
     end.
 
+gethostaddr([$l, $o, $c, $a, $l, $:|Path]) ->
+    [{{local, Path}, local}];
 gethostaddr(Host) ->
     Lookups = [{Family, inet:getaddr(Host, Family)}
                || Family <- inet_address_preference()],
